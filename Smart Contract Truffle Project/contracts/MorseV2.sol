@@ -96,13 +96,6 @@ contract MorseV2 is ERC721Enumerable, Ownable {
     }
 
     function withdraw() public payable onlyOwner {
-        /*
-        SEND ARTIST ADDRESS 5% of transactions.
-        (bool hs, ) = payable(<ARTIST WALLET ADDRESS>).call{value: address(this.balance) * 5 /100("")};
-        require(hs);
-        */
-
-        //Send contract balance to owner contract.
         (bool os, ) = payable(owner()).call{value: address(this).balance}("");
         require(os);
     }
