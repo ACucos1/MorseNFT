@@ -18,6 +18,7 @@ class App extends Component{
 
     this.MorseLoad = this.MorseLoad.bind(this)
     this.textScramble = this.textScramble.bind(this)
+    this.truncateAccount = this.truncateAccount.bind(this)
   }
 
   async loadWeb3(){
@@ -170,22 +171,44 @@ class App extends Component{
     
   }
 
+  truncateAccount(acc){
+    let str = acc.split("")
+    let ret = "";
+    for(var i = 0; i < 6; i++){
+      ret += str[i]
+    }
+    ret += "..."
+    for(i = acc.length - 1; i > acc.length - 5; i--){
+      console.log('str[i]')
+      ret += str[i]
+    }
+    console.log('ret is: ' + ret)
+    return ret
+  }
+
   render(){
   return (
     <div className="App">
-      <div className="title">
-        <h1 id="morse"> </h1>
-        <p>Decode the secrets</p>
-      </div>
+      <div className="section1">
+        
+        <div className="title">
+          <h1 id="morse"> </h1>
+          <p>Own your piece of history</p>
+        </div>
 
-      <div className="content">
-        <span><strong>{this.state.userAccount ? this.state.userAccount : "Please connect to Metamask"}</strong></span>
-        <div className="numMinted">
-          <p>Number of codes minted: <span className="num">{this.state.totalSupply}</span>/10,000</p>
+        <div className="content">
+          <span><strong>{this.state.userAccount ? this.truncateAccount(this.state.userAccount) : "Please connect to Metamask"}</strong></span>
+          <div className="numMinted">
+            <p>Number of codes minted: <br/><span className="num">{this.state.totalSupply}</span>/10,000</p>
+          </div>
+          <div className="mint">
+            <button className="mintbtn" onClick={() => {this.mint()}}>MINT</button>
+          </div>
         </div>
-        <div className="mint">
-          <button className="mintbtn" onClick={() => {this.mint()}}>MINT</button>
-        </div>
+
+      </div>
+      <div className="section2">
+        <h1>Own your piece of history</h1>
       </div>
     </div>
   );
